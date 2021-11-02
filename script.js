@@ -1,34 +1,34 @@
-var termekTomb = [];
+var webTomb = [];
 
 $(function () {
 
 
-    $("article").on("click", ".torol", function () {
-        var index = Number($(this).attr("index"));
-        termekTomb.splice(index, 1);
-        //termekMegjelenit();
+        WeboldalMegjelenit();
 
 
 
-            
-});
-$.ajax(
-    {url: "termekek.json", success: function (result) {
-            console.log(result);
-            termekTomb = result;
-            termekMegjelenit();
+    $.ajax(
+            {url: "termekek.json", success: function (result) {
+                    console.log(result);
+                    webTomb = result;                  
+                    WeboldalMegjelenit();
+           
+                }});
 
-         
-        }});
 });
 
-function termekMegjelenit() {
-    for (var item in termekTomb) {
-        var termekek =  "<table><tr><td>Terméknév</td><td>Leírás</td>><td>Készlet</td><td>Ár</td></tr><tr><th>"+termekTomb[item]["nev"] +
-        "</th><th>"+termekTomb[item]["leiras"] + "</th><th>"+termekTomb[item]["keszlet"] + "</th><th>"+termekTomb[item]["ar"]+"</th><th><input type='button' value='Módosít' class='modosit'></th><th><input type='button' value='Törlés' class='torol'</th></tr></table>"
-    
-        $("aside").append("<tr id='"+termekTomb[item][""] +"'>"+termekek+"</tr>");
-        
+
+
+
+function WeboldalMegjelenit() {
+    $("article").empty();
+    for (var item in webTomb) {
+        var termek = "<div><h3>" + webTomb[item]["nev"] + " </h3\n\
+                          <p>" + webTomb[item]["leiras"] + "</p>\n\
+                          <img src='" + webTomb[item]['kep'] + "' alt='" + webTomb[item]['kep'].slice(7,webTomb[item]['kep'].length-4) + "' >\n\
+                          <span>" + webTomb[item]["ar"] + "</span>\n\
+                           </div>";
+        $("article").append("<div id='" + webTomb[item]["nev"] + "'>" + termek + "</div>");
 
     }
 
